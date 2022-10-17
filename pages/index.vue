@@ -74,6 +74,7 @@
         Update Patient Medical Record
       </h1>
       <p class=" text-menuText my-2">Click the tabs to view and edit patient medical details</p>
+      {{postData}}
       <Card>
         <form @submit.prevent="submitData">
           <p class="text-customTxt font-bold mt-10">{{medRecords.data[0].title}}</p>
@@ -109,6 +110,7 @@
       
       </Card>
 
+     
         
       <!-- Main modal -->
       <div id="defaultModal" v-if="postData" class=" flex justify-center items-center overflow-y-auto overflow-x-hidden fixed top-0 bg-white right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
