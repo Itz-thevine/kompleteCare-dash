@@ -26,29 +26,13 @@
       
       const {xRay, ultraSoundScan} = medicalReport.value;
 
-      // var myHeader = new Headers();
-      // myHeader.append("Accept", "application/json") 
-      // myHeader.append("Content-type", "application/json; charset=UTF-8") 
-      // myHeader.append("Authorization", `Bearer ${token}`) 
-
       var formdata = new FormData();
-      formdata.append("_token", 'csrf_token()');
       formdata.append("investigations[0]", "2");
       formdata.append("investigations[1]", "3");
       formdata.append("investigations[2]", "4");
       formdata.append("ctscan", "Scan needed in the left cerebral hemisphere");
       formdata.append("mri", "Full body MRI");
       formdata.append("developer", "Developer");
-          
-      // const {data: postData , pending, error} = await useFetch('https://testdrive.kompletecare.com/api/investigations', {
-      //   method: 'POST',
-      //   headers: {
-      //     Authorization: `Bearer ${token}`,
-      //     Accept: `application/json`
-      //   },
-      //   body: formdata,
-      //   redirect: 'follow'
-      // })
 
       const {data: postData , pending, error} = useFetch('http://testdrive.kompletecare.com/api/investigations', {
         method: 'POST',
@@ -56,9 +40,6 @@
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: `application/json`,
-          connection: 'keep-alive',
-          AcceptEncoding: 'gzip, deflate, br',
-          
         },
       })
 
