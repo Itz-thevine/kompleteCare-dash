@@ -27,21 +27,23 @@
       const {xRay, ultraSoundScan} = medicalReport.value;
 
       var formdata = new FormData();
-      formdata.append("investigations[0]", "2");
-      formdata.append("investigations[1]", "3");
-      formdata.append("investigations[2]", "4");
-      formdata.append("ctscan", "Scan needed in the left cerebral hemisphere");
-      formdata.append("mri", "Full body MRI");
-      formdata.append("developer", "Developer");
+      
+        formdata.append("_token", "{{ csrf_token() }}");
+        formdata.append("investigations[5]", "9");
+        formdata.append("investigations[0]", "12");
+        formdata.append("ctscan", "fhjdf dfjfdhjf");
+        formdata.append("mri", "dfdfd");
+        formdata.append("developer", "Developer");
 
-      const {data: postData , pending, error} = useFetch('http://testdrive.kompletecare.com/api/investigations', {
+        const {data , pending, error} = useFetch('https://testdrive.kompletecare.com/api/investigations', {
         method: 'POST',
-        body: formdata,
         headers: {
           Authorization: `Bearer ${token}`,
-          Accept: `application/json`,
-        },
-      })
+          Accept: `application/json`
+          },
+          body: formdata,
+          redirect: 'follow'
+        })
 
 
     }else{
