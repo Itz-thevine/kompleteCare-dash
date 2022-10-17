@@ -1,4 +1,4 @@
-task built with tailwind css and Nuxt 3
+# task built with tailwind css and Nuxt 3
 hosted link: https://teal-kringle-5358ef.netlify.app/
 
 # Nuxt 3 Minimal Starter
