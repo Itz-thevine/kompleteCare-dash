@@ -1,8 +1,10 @@
 <script setup>
 
-  import {ref, onMounted} from 'vue';
+  import {ref} from 'vue';
 
   var token = '2092|VBGWzp7DsPxfUie6dWRZbXkveZOaruDCQDA0pOLS'
+
+  const modal = ref(false)
   
   const {data: medRecords , pending, error} = await useFetch('https://testdrive.kompletecare.com/api/investigations', {
     method: 'GET',
@@ -17,6 +19,8 @@
     'xRay' : [],
     'ultraSoundScan': []
   })
+
+
 
   
 
@@ -35,7 +39,7 @@
         formdata.append("mri", "dfdfd");
         formdata.append("developer", "Developer");
 
-        const {data , pending, error} = useFetch('https://testdrive.kompletecare.com/api/investigations', {
+        const {data: postData , pending, error} = useFetch('https://testdrive.kompletecare.com/api/investigations', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
@@ -45,14 +49,24 @@
           redirect: 'follow'
         })
 
+        if(error) {
+          modal.value = false
+        }else{
+          modal.value = true
+        }
 
     }else{
       console.log('can\'t submit null value')
     }
 
-
-
+   
+    
   }
+
+  const changeModal = () => {
+    modal.value = !modal.value
+  }
+ 
 
 </script>
 
@@ -62,7 +76,8 @@
         Update Patient Medical Record
       </h1>
       <p class=" text-menuText my-2">Click the tabs to view and edit patient medical details</p>
-     {{postData}}
+      <p v-if="modal">jdkfjfdk</p>
+
      <!-- {{postError}} -->
       <Card>
         <form @submit.prevent="submitData">
@@ -99,6 +114,28 @@
         </form>
       
       </Card>
+
+        
+      <!-- Main modal -->
+      <div id="defaultModal" v-if="modal" class=" flex justify-center items-center overflow-y-auto overflow-x-hidden fixed top-0 bg-white right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full">
+          <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
+              <!-- Modal content -->
+              <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                  <!-- Modal header -->
+                  
+                  <!-- Modal body -->
+                  <div class="p-6 space-y-6">
+                     <p class="text-3xl">Successfully Submitted!</p>
+                      <div class="w-full flex justify-end">
+                        <button @click="changeModal" class="mt-10 rounded-lg text-white bg-customTxt font-bold px-6 py-2">Close</button>
+                      </div>
+                  </div>
+                 
+              </div>
+          </div>
+      </div>
+
+
     </div>
   </template>
   
