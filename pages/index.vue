@@ -49,19 +49,19 @@
           redirect: 'follow'
         })
 
-        if(error) {
+        if(!postData.value) {
           modal.value = false
         }else{
           modal.value = true
         }
-
-    }else{
-      console.log('can\'t submit null value')
-    }
-
+        
+      }else{
+        console.log('can\'t submit null value')
+      }
+      
    
-    
   }
+  
 
   const changeModal = () => {
     modal.value = !modal.value
@@ -76,9 +76,6 @@
         Update Patient Medical Record
       </h1>
       <p class=" text-menuText my-2">Click the tabs to view and edit patient medical details</p>
-      <p v-if="modal">jdkfjfdk</p>
-
-     <!-- {{postError}} -->
       <Card>
         <form @submit.prevent="submitData">
           <p class="text-customTxt font-bold mt-10">{{medRecords.data[0].title}}</p>
@@ -100,7 +97,6 @@
             </li>
           </ul>
         
-          <!-- djskdj -->
           <div class="flex">
               
               <CardContent class="mr-10">MRI</CardContent>
